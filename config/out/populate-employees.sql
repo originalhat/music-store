@@ -1,400 +1,400 @@
 INSERT INTO employee
     VALUES (
       1,
-      YTNNFLCF,
-      T,
+      FJLXARBL,
+      F,
       2
       );
-
+  
 INSERT INTO employee
     VALUES (
       2,
-      DKCNUHIV,
-      T,
+      KPTIXAQY,
+      F,
       3
       );
-
+  
 INSERT INTO employee
     VALUES (
       3,
-      GKENUDCJ,
-      T,
+      VXFSKJJF,
+      F,
       4
       );
-
+  
 INSERT INTO employee
     VALUES (
       4,
-      RDTSTGJA,
+      PMBGYFGY,
       F,
       5
       );
-
+  
 INSERT INTO employee
     VALUES (
       5,
-      BSFIRSIS,
+      YSZSNDSX,
       F,
       6
       );
-
+  
 INSERT INTO employee
     VALUES (
       6,
-      CVIULJCS,
-      T,
+      AQGMMUCR,
+      F,
       7
       );
-
+  
 INSERT INTO employee
     VALUES (
       7,
-      XBTENNXG,
-      T,
+      QZALREIO,
+      F,
       8
       );
-
+  
 INSERT INTO employee
     VALUES (
       8,
-      SXWGMXCT,
-      T,
+      KZPJRKLW,
+      F,
       9
       );
-
+  
 INSERT INTO employee
     VALUES (
       9,
-      HYMATIPN,
-      T,
+      VVCGZRCO,
+      F,
       10
       );
-
+  
 INSERT INTO employee
     VALUES (
       10,
-      EEXQMSSG,
+      DHIMFGSD,
       F,
       11
       );
-
+  
 INSERT INTO employee
     VALUES (
       11,
-      EINGBPSW,
-      T,
+      WPDHAFFQ,
+      F,
       12
       );
-
+  
 INSERT INTO employee
     VALUES (
       12,
-      SCTXABAU,
+      XJCORPOP,
       T,
       13
       );
-
+  
 INSERT INTO employee
     VALUES (
       13,
-      LJAAVBQF,
+      CMQJIJBH,
       F,
       14
       );
-
+  
 INSERT INTO employee
     VALUES (
       14,
-      HXAABSBZ,
-      T,
+      ICBRZGVY,
+      F,
       15
       );
-
+  
 INSERT INTO employee
     VALUES (
       15,
-      ZKNCTQGY,
+      UTQCRZAB,
       F,
       16
       );
-
+  
 INSERT INTO employee
     VALUES (
       16,
-      HPLQGKEK,
+      KOGUSHRN,
       T,
       17
       );
-
+  
 INSERT INTO employee
     VALUES (
       17,
-      QAWEGLEG,
+      TBRAILQT,
       T,
       18
       );
-
+  
 INSERT INTO employee
     VALUES (
       18,
-      KDZAFHYO,
-      F,
+      SPJLLCDF,
+      T,
       19
       );
-
+  
 INSERT INTO employee
     VALUES (
       19,
-      GHVCQJGX,
+      LTVSORNI,
       T,
       20
       );
-
+  
 INSERT INTO employee
     VALUES (
       20,
-      DCQFNNZJ,
-      T,
+      LJGZGNOZ,
+      F,
       21
       );
-
+  
 INSERT INTO employee
     VALUES (
       21,
-      XKOEQHGJ,
-      T,
+      MWABKUXS,
+      F,
       22
       );
-
+  
 INSERT INTO employee
     VALUES (
       22,
-      NHBAEJRJ,
-      F,
+      UFEFXZOX,
+      T,
       23
       );
-
+  
 INSERT INTO employee
     VALUES (
       23,
-      JKYEEABZ,
-      F,
+      WARMHQZE,
+      T,
       24
       );
-
+  
 INSERT INTO employee
     VALUES (
       24,
-      AHSCXBHL,
-      F,
+      LRLCENEA,
+      T,
       25
       );
-
+  
 INSERT INTO employee
     VALUES (
       25,
-      FEMJCQQN,
+      ONHMOICI,
       F,
       26
       );
-
+  
 INSERT INTO employee
     VALUES (
       26,
-      VGDKXGRM,
-      F,
+      ZIHGFJYM,
+      T,
       27
       );
-
+  
 INSERT INTO employee
     VALUES (
       27,
-      JLYALDZS,
+      AANAWMXT,
       T,
       28
       );
-
+  
 INSERT INTO employee
     VALUES (
       28,
-      PVOCETMB,
+      AQZCPSMY,
       T,
       29
       );
-
+  
 INSERT INTO employee
     VALUES (
       29,
-      JSICYHFX,
+      NEFMWIYY,
       T,
       30
       );
-
+  
 INSERT INTO employee
     VALUES (
       30,
-      KNAVWXUY,
-      F,
+      XGMIGEWD,
+      T,
       31
       );
-
+  
 INSERT INTO employee
     VALUES (
       31,
-      ULTYBOJL,
+      ORDDGRCW,
       T,
       32
       );
-
+  
 INSERT INTO employee
     VALUES (
       32,
-      MWEUGLBT,
+      BVNCNFHT,
       F,
       33
       );
-
+  
 INSERT INTO employee
     VALUES (
       33,
-      KBAHQYQS,
+      NLZWQBEH,
       T,
       34
       );
-
+  
 INSERT INTO employee
     VALUES (
       34,
-      FTVTZZMD,
+      JHLUPBMQ,
       T,
       35
       );
-
+  
 INSERT INTO employee
     VALUES (
       35,
-      JFBEWKEZ,
-      T,
+      ZFXCIUKF,
+      F,
       36
       );
-
+  
 INSERT INTO employee
     VALUES (
       36,
-      DPKDXSNG,
+      JYUUYSDN,
       T,
       37
       );
-
+  
 INSERT INTO employee
     VALUES (
       37,
-      ZCKGUMWU,
-      F,
+      YCVDJTNI,
+      T,
       38
       );
-
+  
 INSERT INTO employee
     VALUES (
       38,
-      QJGEOQJP,
-      T,
+      FTRQVVZZ,
+      F,
       39
       );
-
+  
 INSERT INTO employee
     VALUES (
       39,
-      UTEJOLCF,
+      FUVARPDU,
       T,
       40
       );
-
+  
 INSERT INTO employee
     VALUES (
       40,
-      XWCOIGFM,
-      F,
+      TVMRBZHV,
+      T,
       41
       );
-
+  
 INSERT INTO employee
     VALUES (
       41,
-      KLUVQIIF,
-      T,
+      ITNTRKSF,
+      F,
       42
       );
-
+  
 INSERT INTO employee
     VALUES (
       42,
-      NQGVLBHG,
+      ZNITAVQT,
       T,
       43
       );
-
+  
 INSERT INTO employee
     VALUES (
       43,
-      LGPDFLUY,
-      T,
+      SZGTZXMX,
+      F,
       44
       );
-
+  
 INSERT INTO employee
     VALUES (
       44,
-      JYMXDCOU,
-      T,
+      PBERDTHJ,
+      F,
       45
       );
-
+  
 INSERT INTO employee
     VALUES (
       45,
-      LYGXDQIB,
-      F,
+      PVPGINNN,
+      T,
       46
       );
-
+  
 INSERT INTO employee
     VALUES (
       46,
-      ZYZJXISL,
-      F,
+      WMMGIEHO,
+      T,
       47
       );
-
+  
 INSERT INTO employee
     VALUES (
       47,
-      HPCYVQSU,
+      DBCRSVOZ,
       T,
       48
       );
-
+  
 INSERT INTO employee
     VALUES (
       48,
-      WQRSKETQ,
+      WKNKXQXG,
       F,
       49
       );
-
+  
 INSERT INTO employee
     VALUES (
       49,
-      PEVENBUN,
-      F,
+      STQYKGBZ,
+      T,
       50
       );
-
+  
 INSERT INTO employee
     VALUES (
       50,
-      DDXTIIJV,
-      T,
-
+      AXODDEMD,
+      F,
+      
       );
-
+  
