@@ -22,7 +22,7 @@ end
 # return a customizable string for populating the 'ARTISTS' table
 def make_artist unique_index
   artist_name = (0...8).map{ 65.+(rand(26)).chr }.join
-  return "INSERT INTO artists VALUES (#{rand(500)}, #{artist_name});"
+  return "INSERT INTO artists VALUES (#{rand(500)}, '#{artist_name}');"
 end
 
 # populate the contacts table, then map the respective contact keys to: employees, vendors,
@@ -63,7 +63,7 @@ end
 
 # list of vendors
 def vendors
-  ['Sony', 'Virgin Records', 'BradDisks', 'Devin\\\'s MP3 Co.']
+  ['Sony', 'Virgin Records', 'BradDisks', 'Devin\'\'s MP3 Co.']
 end
 
 # create a single INSERT command for a contact
@@ -74,17 +74,17 @@ def make_contact unique_index
   city    = (0...5).map{ 65.+(rand(26)).chr }.join
   state   = (0...2).map{ 65.+(rand(26)).chr }.join
   email   = "#{name}@#{city}.com"
-  phone   = "#{rand(999)}-#{rand(999)}-#{rand(9999)}"
+  phone   = "#{rand(999999)}"
 
   return %{INSERT INTO contact
     VALUES (
       #{unique_index},
-      #{name},
-      #{address} Street,
-      #{city},
-      #{state},
+      '#{name}',
+      '#{address} Street',
+      '#{city}',
+      '#{state}',
       #{rand(90000) + 9999},
-      #{email},
+      '#{email}',
       #{phone});
     }
 end
@@ -95,7 +95,7 @@ def make_employee unique_index, contact_key
   job_title = ['manager', 'sales clerk', 'CEO', 'admin'].shuffle.first
   active    = ['T', 'F'].shuffle.first
 
-  %{INSERT INTO employees VALUES (#{unique_index}, #{job_title}, #{active}, #{contact_key});}
+  %{INSERT INTO employees VALUES (#{unique_index}, '#{job_title}', '#{active}', #{contact_key});}
 end
 
 # create a single INSERT command for a vendor
@@ -106,7 +106,7 @@ end
 # create a single INSERT command for a customer
 def make_customer index, contact_key
   promotions = ['T', 'F'].shuffle.first
-  %{INSERT INTO customers VALUES (#{index}, #{promotions}, #{contact_key});}
+  %{INSERT INTO customers VALUES (#{index}, '#{promotions}', #{contact_key});}
 end
 
 def populate_job_titles
@@ -122,7 +122,7 @@ def populate_job_titles
 
   File.open( populate_job_title_path, "a" ) do |f|
     job_titles.each_with_index do | job_title, index |
-      f.puts "INSERT INTO job_titles VALUES (#{job_title}, #{wage_amount[index]} #{wage_types[index]});"
+      f.puts "INSERT INTO job_title VALUES ('#{job_title}', #{wage_amount[index]}, '#{wage_types[index]}');"
     end
   end
 end
@@ -149,9 +149,13 @@ end
 
 # create a single INSERT command for a music item
 def make_music isbn, title
+
+  music_type = [ 'CD', 'SHEET', 'MP3' ].shuffle.first
+
   %{INSERT INTO music VALUES (
-      #{isbn},
       '#{title}',
+      #{isbn},
+      '#{music_type}',
       '#{vendors.shuffle.first}',
       '#{genre.shuffle.first}',
       #{rand(23) + 1990},
@@ -175,11 +179,16 @@ def populate_promotions count
   (1..count).each do | promotion |
     File.open( populate_promotion_path, "a" ) do |f|
 
-      discount    = rand(100.0) / 100.0
+      discount    = rand(100)
       random_isbn = rand(5000)
       random_date = Time.at(0.0 + rand * (Time.now.to_f - 0.0.to_f) + 500000000)
 
-      f.puts "INSERT INTO promotions VALUES ('#{random_date.strftime("%Y-%m-%d")}', '#{(random_date + rand(10000) + 100000).strftime("%Y-%m-%d")}', #{discount}, #{random_isbn});"
+      f.puts "INSERT INTO promotions VALUES (
+        #{promotion},
+        to_date('#{random_date.strftime("%Y/%m/%d")}','YYYY/MM/DD'),
+        to_date('#{(random_date + rand(10000) + 100000).strftime("%Y/%m/%d")}','YYYY/MM/DD'),
+        #{discount},
+        #{random_isbn});"
     end
   end
 end
