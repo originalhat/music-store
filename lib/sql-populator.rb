@@ -37,7 +37,7 @@ def populate_contacts count
 
   (1..count).each do | unique_index |
     File.open( populate_contact_path, "a" ) do |f|
-      f.puts make_contact unique_index
+      f.puts make_contact unique_index - 1
       contact_keys << unique_index
     end
   end
@@ -49,13 +49,13 @@ def populate_contacts count
 
   File.open( populate_contact_path, "a" ) do |f|
     contact_keys.each_with_index do | contact_key, index |
-      f.puts make_employee index, contact_key if index < 50
+      f.puts make_employee index, contact_key - 1 if index < 50
 
-      if (index > 49 and index < 150)
-        f.puts make_vendor index, contact_key, ( contact_key + 50 )
+      if (index > 49 and index < 100)
+        f.puts make_vendor index - 50, contact_key - 1, ( contact_key + 49 )
       end
 
-      f.puts make_customer index, contact_key if ( index > 149 and index < 300 )
+      f.puts make_customer index - 150, contact_key - 1 if ( index > 149 and index < 300 )
 
     end
   end
