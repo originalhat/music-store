@@ -8,26 +8,29 @@ import java.sql.Statement;
 public class Main {
 
     final static String MUSIC_STORE_URL = "jdbc:oracle:thin:@//Cncsidb01.msudenver.edu:1521/db01";
+    final static String USERNAME = "bgill9";
+    final static String PASSWORD = "W3lc0m3";
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) {
+        try {
+            selectAllMusic();
+        } catch (SQLException e) {
+            System.out.println("SQL Exception: " + e);
+        }
+    }
 
-        java.sql.Connection musicStoreConnection;
-        musicStoreConnection = DriverManager.getConnection(MUSIC_STORE_URL, "bgill9", "W3lc0m3");
+    private static void selectAllMusic() throws SQLException {
+
+        java.sql.Connection connection = DriverManager.getConnection(MUSIC_STORE_URL, USERNAME, PASSWORD);
 
         /* turn commits off */
-        musicStoreConnection.setAutoCommit(false);
+        connection.setAutoCommit(false);
 
-        Statement statement = musicStoreConnection.createStatement();
+        Statement statement = connection.createStatement();
+        ResultSet query = statement.executeQuery("SELECT * FROM music");
 
-        ResultSet connectionInfo = statement.executeQuery("SELECT BANNER FROM SYS.V_$VERSION");
-        while (connectionInfo.next()) {
-            System.out.println(connectionInfo.getString(1));
-        }
-
-        ResultSet contactsQuery = statement.executeQuery("SELECT name FROM contact");
-        while (contactsQuery.next()) {
-            String contactName = contactsQuery.getString("NAME");
-            /* do things with 'contactName', or other fields */
+        while (query.next()) {
+            System.out.println(query.getString("TITLE"));
         }
 
         statement.close();
