@@ -11,18 +11,26 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
-        java.sql.Connection conn = DriverManager.getConnection(MUSIC_STORE_URL, "<username>", "<password>");
+        java.sql.Connection musicStoreConnection;
+        musicStoreConnection = DriverManager.getConnection(MUSIC_STORE_URL, "bgill9", "W3lc0m3");
 
-        conn.setAutoCommit(false);
+        /* turn commits off */
+        musicStoreConnection.setAutoCommit(false);
 
-        Statement stmt = conn.createStatement();
-        ResultSet connectionInfo = stmt.executeQuery("SELECT BANNER FROM SYS.V_$VERSION");
+        Statement statement = musicStoreConnection.createStatement();
 
+        ResultSet connectionInfo = statement.executeQuery("SELECT BANNER FROM SYS.V_$VERSION");
         while (connectionInfo.next()) {
             System.out.println(connectionInfo.getString(1));
         }
 
-        stmt.close();
+        ResultSet contactsQuery = statement.executeQuery("SELECT name FROM contact");
+        while (contactsQuery.next()) {
+            String contactName = contactsQuery.getString("NAME");
+            /* do things with 'contactName', or other fields */
+        }
+
+        statement.close();
 
     }
 }
