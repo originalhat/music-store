@@ -18,12 +18,12 @@ public class Main {
 
         try {
             musicItems = selectMusic("WHERE MUSIC_TITLE='ESGFILXD'");
+            // System.out.println(musicItems.get(0)[0]); // testing / example
         } catch (SQLException e) {
-            System.out.println("ERROR: " + e);
+            System.out.println("SQL ERROR: " + e);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Index Out of Bounds!: " + e);
         }
-
-        // testing / example
-        // System.out.println(musicItems.get(0)[0]);
     }
 
     private static ArrayList<String[]> selectMusic(String condition) throws SQLException {
