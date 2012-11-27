@@ -5,20 +5,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
 
-    final static String MUSIC_STORE_URL = "jdbc:oracle:thin:@//Cncsidb01.msudenver.edu:1521/db01";
-    final static String USERNAME = "bgill9";
-    final static String PASSWORD = "W3lc0m3";
+    final private static String MUSIC_STORE_URL = "jdbc:oracle:thin:@//Cncsidb01.msudenver.edu:1521/db01";
+    final private static String USERNAME = "bgill9";
+    final private static String PASSWORD = "W3lc0m3";
 
     public static void main(String[] args) {
 
-        ArrayList<String[]> musicItems = null;
+        ArrayList<HashMap<String, String>> musicTable = new ArrayList<HashMap<String, String>>();
 
         try {
-            musicItems = selectMusic("WHERE MUSIC_TITLE='ESGFILXD'");
-            // System.out.println(musicItems.get(0)[0]); // testing / example
+
+            // query music table; with or without a condition
+            musicTable = queryMusicInformation("");
+
+            // testing
+            for (int rowNumber = 0; rowNumber < musicTable.size(); rowNumber++) {
+                System.out.println(musicTable.get(rowNumber).get("PRICE"));
+            }
+
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e);
         } catch (IndexOutOfBoundsException e) {
@@ -26,7 +34,7 @@ public class Main {
         }
     }
 
-    private static ArrayList<String[]> selectMusic(String condition) throws SQLException {
+    private static ArrayList<HashMap<String, String>> queryMusicInformation(String condition) throws SQLException {
 
         java.sql.Connection connection = DriverManager.getConnection(MUSIC_STORE_URL, USERNAME, PASSWORD);
 
@@ -36,30 +44,26 @@ public class Main {
         Statement statement = connection.createStatement();
         ResultSet query = statement.executeQuery("SELECT * FROM music " + condition);
 
-        /*
-         * adding a 2 dimensional array(list); unlimited rows, fixed column (9)
-         * width; holds the extracted contents from the 'music' table
-         */
-        ArrayList<String[]> musicItems = new ArrayList<String[]>();
-        String[] rowAttr = new String[9];
+        ArrayList<HashMap<String, String>> musicItems = new ArrayList<HashMap<String, String>>();
 
         while (query.next()) {
-            rowAttr[0] = query.getString("MUSIC_TITLE");
-            rowAttr[1] = query.getString("MUSIC_ISBN");
-            rowAttr[2] = query.getString("MUSIC_TYPE");
-            rowAttr[3] = query.getString("PRODUCER");
-            rowAttr[4] = query.getString("GENRE");
-            rowAttr[5] = query.getString("YEAR");
-            rowAttr[6] = query.getString("VENDOR_ID");
-            rowAttr[7] = query.getString("PRICE");
-            rowAttr[8] = query.getString("QUANTITY");
 
-            musicItems.add(rowAttr);
+            HashMap<String, String> musicTableRow = new HashMap<String, String>();
+
+            musicTableRow.put("MUSIC_TITLE", query.getString("MUSIC_TITLE"));
+            musicTableRow.put("MUSIC_ISBN", query.getString("MUSIC_ISBN"));
+            musicTableRow.put("PRODUCER", query.getString("PRODUCER"));
+            musicTableRow.put("GENRE", query.getString("GENRE"));
+            musicTableRow.put("YEAR", query.getString("YEAR"));
+            musicTableRow.put("VENDOR_ID", query.getString("VENDOR_ID"));
+            musicTableRow.put("PRICE", query.getString("PRICE"));
+            musicTableRow.put("QUANTITY", query.getString("QUANTITY"));
+
+            musicItems.add(musicTableRow);
 
         }
 
         statement.close();
-
         return musicItems;
 
     }
