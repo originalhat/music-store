@@ -29,6 +29,8 @@ Two-dimmensional-ish array...
 
 ## Accessing Specific Data
 
+NOTE: try to push any of the data restriction / limitations functionality into the query, rather than the result.
+
 This example shows how to retrieve the `PRICE` column for all rows.
 
 ```java
