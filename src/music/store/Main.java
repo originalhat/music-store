@@ -2,6 +2,7 @@ package music.store;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -15,18 +16,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ArrayList<HashMap<String, String>> musicTable = new ArrayList<HashMap<String, String>>();
-
         try {
-
-            // query music table; with or without a condition
-            musicTable = queryMusicInformation("");
-
-            // testing
-            for (int rowNumber = 0; rowNumber < musicTable.size(); rowNumber++) {
-                System.out.println(musicTable.get(rowNumber).get("PRICE"));
-            }
-
+            displayQueryResults(queryDatabase("SELECT price FROM music WHERE price < 10"));
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e);
         } catch (IndexOutOfBoundsException e) {
@@ -34,37 +25,55 @@ public class Main {
         }
     }
 
-    private static ArrayList<HashMap<String, String>> queryMusicInformation(String condition) throws SQLException {
+    private static void displayQueryResults(ArrayList<HashMap<String, String>> musicTable) {
 
-        java.sql.Connection connection = DriverManager.getConnection(MUSIC_STORE_URL, USERNAME, PASSWORD);
+        System.out.println(musicTable.size());
 
-        /* turn commits off */
-        connection.setAutoCommit(false);
+        for (int rowNumber = 0; rowNumber < musicTable.size(); rowNumber++) {
+            System.out.println(musicTable.get(rowNumber));
+        }
+    }
 
-        Statement statement = connection.createStatement();
-        ResultSet query = statement.executeQuery("SELECT * FROM music " + condition);
+    private static ArrayList<HashMap<String, String>> queryDatabase(String query) throws SQLException {
+
+        Statement statement = getConnection();
+        ResultSet queryResult = statement.executeQuery(query);
+        ResultSetMetaData queryMetaData = getQueryMetaData(queryResult);
 
         ArrayList<HashMap<String, String>> musicItems = new ArrayList<HashMap<String, String>>();
 
-        while (query.next()) {
+        // row level
+        while (queryResult.next()) {
 
             HashMap<String, String> musicTableRow = new HashMap<String, String>();
 
-            musicTableRow.put("MUSIC_TITLE", query.getString("MUSIC_TITLE"));
-            musicTableRow.put("MUSIC_ISBN", query.getString("MUSIC_ISBN"));
-            musicTableRow.put("PRODUCER", query.getString("PRODUCER"));
-            musicTableRow.put("GENRE", query.getString("GENRE"));
-            musicTableRow.put("YEAR", query.getString("YEAR"));
-            musicTableRow.put("VENDOR_ID", query.getString("VENDOR_ID"));
-            musicTableRow.put("PRICE", query.getString("PRICE"));
-            musicTableRow.put("QUANTITY", query.getString("QUANTITY"));
+            // column level
+            for (int i = 1; i <= queryMetaData.getColumnCount(); i++) {
+
+                String columnName = queryMetaData.getColumnName(i);
+
+                if (columnName != null) {
+                    musicTableRow.put(columnName, queryResult.getString(columnName));
+                }
+            }
 
             musicItems.add(musicTableRow);
 
         }
 
         statement.close();
+
         return musicItems;
 
+    }
+
+    private static ResultSetMetaData getQueryMetaData(ResultSet queryResult) throws SQLException {
+        return queryResult.getMetaData();
+    }
+
+    private static Statement getConnection() throws SQLException {
+        java.sql.Connection connection = DriverManager.getConnection(MUSIC_STORE_URL, USERNAME, PASSWORD);
+        Statement statement = connection.createStatement();
+        return statement;
     }
 }
