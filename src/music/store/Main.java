@@ -4,13 +4,19 @@ import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    private static String query = "SELECT * FROM music";
 
+    public static void main(String[] args) {
+        queryDatabase();
+    }
+
+    private static void queryDatabase() {
         try {
 
             MusicStoreQuery newQuery = new MusicStoreQuery();
 
-            newQuery.displayQueryResults(newQuery.queryDatabase("SELECT price FROM music WHERE price < 10"));
+            newQuery.setCredentials("bgill9", "W3lc0m3");
+            newQuery.displayQueryResults(newQuery.queryDatabase(query));
 
         } catch (SQLException e) {
             System.out.println("SQL ERROR: " + e);
@@ -18,5 +24,4 @@ public class Main {
             System.out.println("Index Out of Bounds!: " + e);
         }
     }
-
 }

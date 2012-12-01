@@ -11,8 +11,8 @@ import java.util.HashMap;
 public class MusicStoreQuery {
 
     final private String MUSIC_STORE_URL = "jdbc:oracle:thin:@//Cncsidb01.msudenver.edu:1521/db01";
-    final private String USERNAME = "bgill9";
-    final private String PASSWORD = "W3lc0m3";
+    private String USERNAME; // bgill9
+    private String PASSWORD; // W3lc0m3
 
     public ArrayList<HashMap<String, String>> queryDatabase(String query) throws SQLException {
 
@@ -57,9 +57,23 @@ public class MusicStoreQuery {
         return queryResult.getMetaData();
     }
 
-    private Statement getConnection() throws SQLException {
+    public Statement getConnection() throws SQLException {
         java.sql.Connection connection = DriverManager.getConnection(MUSIC_STORE_URL, USERNAME, PASSWORD);
         Statement statement = connection.createStatement();
         return statement;
+    }
+
+    public boolean testConnecton() throws SQLException {
+        ResultSet connectionInfo = getConnection().executeQuery("SELECT BANNER FROM SYS.V_$VERSION");
+
+        if (connectionInfo.next())
+            return true;
+        else
+            return false;
+    }
+
+    public void setCredentials(String username, String password) {
+        USERNAME = username;
+        PASSWORD = password;
     }
 }
