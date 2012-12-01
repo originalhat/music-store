@@ -55,7 +55,7 @@ public class Menu extends JFrame {
         mnMainMenu.add(mntmSalesApplications);
 
         JMenuItem mntmAdministrativeApplications = new JMenuItem("Administrative Applications");
-        mntmAdministrativeApplications.setAction(action);
+        mntmAdministrativeApplications.setAction(adminListener);
         mnMainMenu.add(mntmAdministrativeApplications);
 
         JMenuItem mntmExit = new JMenuItem("Exit");
