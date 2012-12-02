@@ -12,13 +12,19 @@ import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
 public class Menu extends JFrame {
-    private final Action exitListener = new ExitListener();
     private final Action musicListener = new MusicAppListener();
-    private final Action orderListener = new OrderAppListener();
-    private final Action salesListener = new SalesAppListener();
-    private final Action adminListener = new AdminAppListener();
+    private final Action orderListener = new OrderMenuListener();
+    private final Action salesListener = new SalesMenuListener();
+    private final Action adminListener = new AdminMenuListener();
+    private final Action exitListener = new ExitListener();
 
-    public void createMenu() {
+    private static String[] credentials = new String[2];
+
+    public void createMenu(String[] creds) {
+
+        // set current session's connection
+        credentials = creds;
+
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -34,7 +40,7 @@ public class Menu extends JFrame {
 
     public Menu() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(200, 200, 900, 600);
+        setBounds(100, 100, 450, 300);
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -63,6 +69,63 @@ public class Menu extends JFrame {
         mnMainMenu.add(mntmExit);
     }
 
+    private class MusicAppListener extends AbstractAction {
+        public MusicAppListener() {
+            putValue(NAME, "Music Applications");
+            putValue(SHORT_DESCRIPTION, "Add Music, Query Music");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            MusicApplications musicAppsFrame = new MusicApplications();
+
+            musicAppsFrame.startMusicApplication(credentials);
+            dispose();
+        }
+    }
+
+    private class OrderMenuListener extends AbstractAction {
+        public OrderMenuListener() {
+            putValue(NAME, "Order Applications");
+            putValue(SHORT_DESCRIPTION, "Query Orders, Place New Order");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            OrderApplications csa = new OrderApplications();
+            csa.createOrderApplications();
+            dispose();
+        }
+    }
+
+    private class SalesMenuListener extends AbstractAction {
+        public SalesMenuListener() {
+            putValue(NAME, "Sales Applications");
+            putValue(SHORT_DESCRIPTION, "Sell Music Title");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SalesApplications csa = new SalesApplications();
+            csa.CreateSalesApplications();
+            dispose();
+        }
+    }
+
+    private class AdminMenuListener extends AbstractAction {
+        public AdminMenuListener() {
+            putValue(NAME, "Admin Applications");
+            putValue(SHORT_DESCRIPTION, "Search, Add, Remove Employees");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AdminApplications adminApps = new AdminApplications();
+            adminApps.createAdminApplications(credentials);
+            dispose();
+        }
+    }
+
     private class ExitListener extends AbstractAction {
         public ExitListener() {
             putValue(NAME, "Exit");
@@ -71,51 +134,8 @@ public class Menu extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            /** exit program **/
             dispose();
-        }
-    }
-
-    private class MusicAppListener extends AbstractAction {
-        public MusicAppListener() {
-            putValue(NAME, "Music Applications");
-            putValue(SHORT_DESCRIPTION, "Some short description");
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        }
-    }
-
-    private class OrderAppListener extends AbstractAction {
-        public OrderAppListener() {
-            putValue(NAME, "Order Applications");
-            putValue(SHORT_DESCRIPTION, "Some short description");
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        }
-    }
-
-    private class SalesAppListener extends AbstractAction {
-        public SalesAppListener() {
-            putValue(NAME, "Sales Applications");
-            putValue(SHORT_DESCRIPTION, "Some short description");
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        }
-    }
-
-    private class AdminAppListener extends AbstractAction {
-        public AdminAppListener() {
-            putValue(NAME, "Admin Applications");
-            putValue(SHORT_DESCRIPTION, "Some short description");
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
         }
     }
 }

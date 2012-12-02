@@ -22,9 +22,6 @@ public class LoginFrame extends JFrame {
     private final JTextField txtUser;
     private final JTextField txtPassword;
 
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -75,8 +72,7 @@ public class LoginFrame extends JFrame {
 
         final JTextArea debugBox = new JTextArea();
         debugBox.setEditable(false);
-        debugBox.setText("login info...");
-        debugBox.setBounds(23, 190, 383, 59);
+        debugBox.setBounds(23, 190, 389, 59);
         panel.add(debugBox);
 
         JButton btnEnterTheStore = new JButton("Enter the Store");
@@ -86,17 +82,19 @@ public class LoginFrame extends JFrame {
 
                 MusicStoreQuery newQuery = new MusicStoreQuery();
 
-                // newQuery.setCredentials(txtUser.getText(),
-                // txtPassword.getText());
+                newQuery.setCredentials(txtUser.getText(), txtPassword.getText());
 
-                newQuery.setCredentials("bgill9", "W3lc0m3");
+                String[] credentials = new String[2];
+
+                credentials[0] = txtUser.getText();
+                credentials[1] = txtPassword.getText();
 
                 try {
                     if (newQuery.testConnecton()) {
                         debugBox.setText("Connected Successfully!");
-                        dispose();
                         Menu menu = new Menu();
-                        menu.createMenu();
+                        menu.createMenu(credentials);
+                        dispose();
                     }
                 } catch (SQLException e) {
                     debugBox.setText("Incorrect Login Credentials!");

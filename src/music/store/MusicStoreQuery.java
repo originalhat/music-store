@@ -1,5 +1,6 @@
 package music.store;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -11,12 +12,17 @@ import java.util.HashMap;
 public class MusicStoreQuery {
 
     final private String MUSIC_STORE_URL = "jdbc:oracle:thin:@//Cncsidb01.msudenver.edu:1521/db01";
-    private String USERNAME; // bgill9
-    private String PASSWORD; // W3lc0m3
+    private String USERNAME;
+    private String PASSWORD;
+
+    public void updateQuery(String query) throws SQLException {
+        Statement statement = getConnectionStatement();
+        statement.executeUpdate(query);
+    }
 
     public ArrayList<HashMap<String, String>> queryDatabase(String query) throws SQLException {
 
-        Statement statement = getConnection();
+        Statement statement = getConnectionStatement();
         ResultSet queryResult = statement.executeQuery(query);
         ResultSetMetaData queryMetaData = getQueryMetaData(queryResult);
 
@@ -57,14 +63,19 @@ public class MusicStoreQuery {
         return queryResult.getMetaData();
     }
 
-    public Statement getConnection() throws SQLException {
+    public Statement getConnectionStatement() throws SQLException {
         java.sql.Connection connection = DriverManager.getConnection(MUSIC_STORE_URL, USERNAME, PASSWORD);
         Statement statement = connection.createStatement();
         return statement;
     }
 
+    public Connection getConnection() throws SQLException {
+        java.sql.Connection connection = DriverManager.getConnection(MUSIC_STORE_URL, USERNAME, PASSWORD);
+        return connection;
+    }
+
     public boolean testConnecton() throws SQLException {
-        ResultSet connectionInfo = getConnection().executeQuery("SELECT BANNER FROM SYS.V_$VERSION");
+        ResultSet connectionInfo = getConnectionStatement().executeQuery("SELECT BANNER FROM SYS.V_$VERSION");
 
         if (connectionInfo.next())
             return true;
